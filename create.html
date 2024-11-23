@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Book</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Create New Book</h1>
+    <form id="create-form">
+        <input type="text" id="book-title" name="title" placeholder="Title" required />
+        <input type="text" id="book-author" name="author" placeholder="Author" required />
+        <input type="number" id="book-year" name="year" placeholder="Year" required />
+        <button type="submit">Create Book</button>
+    </form>
+
+    <script>
+        const createForm = document.getElementById('create-form');
+        const bookTitleInput = document.getElementById('book-title');
+        const bookAuthorInput = document.getElementById('book-author');
+        const bookYearInput = document.getElementById('book-year');
+
+        // Add new book to localStorage
+        createForm.onsubmit = (e) => {
+            e.preventDefault();
+            const newBook = {
+                title: bookTitleInput.value,
+                author: bookAuthorInput.value,
+                year: bookYearInput.value,
+            };
+            const books = JSON.parse(localStorage.getItem('books')) || [];
+            books.push(newBook);  // Add new book to array
+            localStorage.setItem('books', JSON.stringify(books));  // Save books array to localStorage
+            window.location.href = 'index.html';  // Go back to homepage
+        };
+    </script>
+</body>
+</html>
